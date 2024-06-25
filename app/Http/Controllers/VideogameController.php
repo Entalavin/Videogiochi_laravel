@@ -57,6 +57,14 @@ class VideogameController extends Controller
     {
         // dd($request);
         //validare i dati
+        $request->validate([
+            'title' => 'required|string|min:3|max:255',
+            'description' => 'required|string',
+            'developer_id' =>'required',
+            'publisher_id' => 'required',
+            'year' => 'required|integer'
+        ]);
+
         //creare variabile $validateData = $this->validateVideogameData($request);
         $videogame = new Videogame(); //creo un'istanza
 
@@ -99,7 +107,8 @@ class VideogameController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $videogame = Videogame::find($id);
+        return view('admin.videogames.edit', compact('videogame'));
     }
 
     /**
@@ -107,7 +116,20 @@ class VideogameController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request);
+        $request->validate([
+            'title' => 'required|string|min:3|max:255',
+            'description' => 'required|string',
+            'developer_id' =>'required',
+            'publisher_id' => 'required',
+            'year' => 'required|integer'
+        ]);
+
+        $videogame = Videogame::find($id);
+        $videogame->update($request->all());
+
+        return redirect()->route('admin.videogames.index');
+
     }
 
     /**

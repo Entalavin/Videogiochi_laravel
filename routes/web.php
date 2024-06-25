@@ -32,8 +32,12 @@ Route::get('/videogames/{videogame}', [VideogameController::class, 'show'])->nam
 // route admin
 
 Route::get('/dashboard/videogames', [VideogameController::class, 'index_admin'])->name('admin.videogames.index');
-
-Route::get('/dashboard/videogames/create_videogames',[VideogameController::class, 'create'])->name('admin.videogames.create');
+//create
+Route::get('/dashboard/videogames/create_videogame',[VideogameController::class, 'create'])->name('admin.videogames.create');
 
 Route::post('/dashboard/videogames',[VideogameController::class, 'store'])->name('admin.videogames.store');
 
+//edit
+
+Route::get('/dashboard/videogames/edit_videogame/{videogame}',[VideogameController::class, 'edit'])->name('admin.videogames.edit');
+Route::put('/dashboard/videogames/{videogame}',[VideogameController::class, 'update'])->name('admin.videogames.update');

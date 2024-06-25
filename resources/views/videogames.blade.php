@@ -6,7 +6,7 @@
 @section('content')
 <div>
     <h1 class="text-center text-uppercase" style="padding-top: 50px; padding-bottom: 50px">Tutti i videogiochi</h1>
-    <p class="text-center" style="padding-bottom:30px">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem laborum vero incidunt possimus, hic eligendi adipisci quidem magnam expedita doloribus nobis numquam quis repellat corporis dolores fuga assumenda atque! Quia?</p>
+    <p class="text-center" style="padding-bottom:30px">Pueri er traffik herbae kilos impellit ex quo indecim anno habet ergo ne scripseritis falsa verba sus deus in meum dm ne foedaverits cum vestris stupidis verbis turpes meretrices culi nigri traffik trapis rex est kilos impellit nos repperini qui expergiscintur mane et repperini faciunt non facimus intelligisne hoc est trap veritati omnes canti quem scribemus sunt nostra vita intellegisne gallagher traffikque agimus vita in film se traffik captus est intellegisne quod kilos habebat non scitis quantum carebor esse cui traffik trappando omnes dies sue domi intellegisne non scitis quantum carebor er traffik et omnia quae egimus et risos et omnia res in quibus omnes vos derisimus</p>
     <hr class="border border-primary border-2 opacity-50">
 </div>
 <div class="container">
