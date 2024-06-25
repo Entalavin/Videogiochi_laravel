@@ -6,7 +6,7 @@
 
 <h1 class="text-center text-uppercase">Videogiochi</h1>
 {{-- @dd($videogames) --}}
-<a href="">Inserisci un nuovo videogioco!</a>
+<a href="{{route('admin.videogames.create')}}">Inserisci un nuovo videogioco!</a>
 
 
 <div>

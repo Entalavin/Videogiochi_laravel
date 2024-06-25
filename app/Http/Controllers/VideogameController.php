@@ -47,7 +47,7 @@ class VideogameController extends Controller
      */
     public function create()
     {
-        //
+        return view ('admin.videogames.create');
     }
 
     /**
@@ -55,20 +55,33 @@ class VideogameController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         //validare i dati
         //creare variabile $validateData = $this->validateVideogameData($request);
-        //$videogame = new Videogame(); creo un'istanza
-        //$videogame->fill($validateData)
+        $videogame = new Videogame(); //creo un'istanza
 
-        //gestiamo l'inserimento dell'immagine
-        //$fileName = time() . '_' .$request->file('poster')->getClientOriginalName(); 
-        //questo poster nella parentesi deve essere uguale al name sul form, id e for devono pure essere uguali. time serve per mettere il timestamp concatenato al nome del file per evitare refusi
-        //$posterPath = $request->file('poster')->storeAs('posters', $filename, 'public'); carica l'immagine nella cartella storage/posters
-        //$videogame->poster = $posterPath; salva il percorso nel campo del db
+        $videogame->title = $request->title;
+        $videogame->description = $request->description;
+        $videogame->developer_id = $request->developer_id;
+        $videogame->publisher_id = $request->publisher_id;
+        $videogame->year = $request->year;
+
+        $videogame->save();
+
+        return redirect()->route('admin.videogames.index');
+
+
+        // $videogame->fill($validateData)
+
+        // gestiamo l'inserimento dell'immagine
+        // $fileName = time() . '_' .$request->file('poster')->getClientOriginalName(); 
+        // questo poster nella parentesi deve essere uguale al name sul form, id e for devono pure essere uguali. time serve per mettere il timestamp concatenato al nome del file per evitare refusi
+        // $posterPath = $request->file('poster')->storeAs('posters', $filename, 'public'); carica l'immagine nella cartella storage/posters
+        // $videogame->poster = $posterPath; salva il percorso nel campo del db
         
 
         //if($videogame->save()){$videogame->genres()->attach($validateData['genres'])};  attacca i dati nella tabella ponte
-        //return redirect->route('admin.videogames.index'nome della rotta giusta ovviamente); oppure dire che se c'è qualche errore rimane qua con messaggio di errore
+        // //return redirect->route('admin.videogames.index'nome della rotta giusta ovviamente); oppure dire che se c'è qualche errore rimane qua con messaggio di errore
 
     }
 
