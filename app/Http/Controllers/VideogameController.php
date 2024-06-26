@@ -45,7 +45,7 @@ class VideogameController extends Controller
 
     public function index_admin()
     {
-        $videogames = Videogame::all();
+        $videogames = Videogame::paginate(7);
         $developers = Developer::all();
         $publishers = Publisher::all();
         $genres = Genre::all();
