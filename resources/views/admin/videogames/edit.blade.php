@@ -24,15 +24,42 @@
             @enderror
         </div>
         <div class="mb-3">
+            {{-- @foreach($genres as $genre)
+            <input type="checkbox" id="genre_{{$genre->id}}" name="genre[]" value="{{$genre->id}}" {{ $videogame->genre->contains($genre->id) ? 'checked' : '' }}>
+            <label for="genre_{{$genre->id}}">{{$genre->name}}</label>
+            @endforeach --}}
+            @foreach($genres as $genre)
+                <input type="checkbox" id="genre_{{ $genre->id }}" name="genre[]" value="{{ $genre->id }}" {{ $videogame->genre->contains($genre->id) ? 'checked' : '' }}>
+                <label for="genre_{{ $genre->id }}">{{ $genre->name }}</label>
+                <br>
+            @endforeach
+            {{-- @foreach($genres as $genre)
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input type="checkbox" name="genres[]" id="genre{{ $genre->id }}" value="{{ $genre->id }}" class="form-check-input" {{ in_array($genre->id, $videogame->genres->pluck('id')->toArray()) ? 'checked' : '' }}>
+                        <label for="genre{{ $genre->id }}" class="form-check-label">{{ $genre->name }}</label>
+                    </div>
+                </div>
+            @endforeach --}}
+        </div>
+        <div class="mb-3">
             <label for="developer_id" class="form-label">Developer</label>
-            <input type="text" class="form-control" id="developer_id" name="developer_id" value= "{{$videogame->developer_id}}" required>
+            <select name="developer_id" id="developer_id" class="form-control" required>
+                @foreach($developers as $developer)
+                    <option value="{{ $developer->id }}" {{ $videogame->developer_id == $developer->id ? 'selected' : '' }}>{{ $developer->name }}</option>
+                @endforeach
+            </select>
             @error('developer_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-3">
             <label for="publisher_id" class="form-label">Publisher</label>
-            <input type="text" class="form-control" id="publisher_id" name="publisher_id" value= "{{$videogame->publisher_id}}"  required>
+            <select name="publisher_id" id="publisher_id" class="form-control" required>
+                @foreach($publishers as $publisher)
+                    <option value="{{ $publisher->id }}" {{ $videogame->publisher_id == $publisher->id ? 'selected' : '' }}>{{ $publisher->name }}</option>
+                @endforeach
+            </select>
             @error('publisher_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror

@@ -3,6 +3,7 @@
 @section('title', 'Inserisci Videogioco')
 
 @section('content')
+{{-- @dd($developers) --}}
 
 <div class="container">
     <h1 class="text-center text-uppercase">inserimento videogioco</h1>
@@ -23,15 +24,31 @@
             @enderror
         </div>
         <div class="mb-3">
+            @foreach($genres as $genre)
+            <input type="checkbox" id="genre_{{$genre->id}}" name="genre[]" value="{{$genre->id}}">
+            <label for="genre_{{$genre->id}}">{{$genre->name}}</label>
+            @endforeach
+        </div>
+        <div class="mb-3">
             <label for="developer_id" class="form-label">Developer</label>
-            <input type="text" class="form-control" id="developer_id" name="developer_id" required>
+            <select class="form-control" name="developer_id" id="developer_id">
+                @foreach($developers as $developer) 
+                <option value=" {{$developer->id}}"> {{$developer->name}} </option>
+                @endforeach
+            </select>
+            
             @error('developer_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-3">
             <label for="publisher_id" class="form-label">Publisher</label>
-            <input type="text" class="form-control" id="publisher_id" name="publisher_id" required>
+            <select class="form-control" name="publisher_id" id="publisher_id">
+                @foreach($publishers as $publisher) 
+                <option value=" {{$publisher->id}}"> {{$publisher->name}} </option>
+                @endforeach
+            </select>
+
             @error('publisher_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VideogameController;
+use App\Http\Controllers\DeveloperController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,7 @@ Route::get('/videogames', [VideogameController::class, 'index'])->name('videogam
 
 Route::get('/videogames/{videogame}', [VideogameController::class, 'show'])->name('show');
 
-// route admin
+// route admin videogame
 
 Route::get('/dashboard/videogames', [VideogameController::class, 'index_admin'])->name('admin.videogames.index');
 //create
@@ -41,3 +42,17 @@ Route::post('/dashboard/videogames',[VideogameController::class, 'store'])->name
 
 Route::get('/dashboard/videogames/edit_videogame/{videogame}',[VideogameController::class, 'edit'])->name('admin.videogames.edit');
 Route::put('/dashboard/videogames/{videogame}',[VideogameController::class, 'update'])->name('admin.videogames.update');
+
+//destroy
+
+Route::delete('/dashboard/videogames/{videogame}', [VideogameController::class, 'destroy'])->name('admin.videogames.destroy');
+
+// route admin developer
+
+Route::get('/dashboard/developers', [DeveloperController::class, 'index'])->name('admin.developers.index');
+//create
+Route::get('/dashboard/developers/create_developer',[DeveloperController::class, 'create'])->name('admin.developers.create');
+Route::post('/dashboard/developers',[DeveloperController::class, 'store'])->name('admin.developers.store');
+//edit
+Route::get('/dashboard/developers/edit_developer/{developer}',[DeveloperController::class, 'edit'])->name('admin.developers.edit');
+Route::put('/dashboard/developers/{developer}',[DeveloperController::class, 'update'])->name('admin.developers.update');

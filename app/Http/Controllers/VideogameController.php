@@ -13,7 +13,17 @@ class VideogameController extends Controller
     /**
      * Display a listing of the resource.
      */
-
+    private function validateData(Request $request) //funzione privata alla quale passo l'oggetto request, l'ho messa fuori la validazione perché mi serve uguale in più punti.
+    {
+        return $request->validate([
+            'title' => 'required|string|min:3|max:255',
+            'description' => 'required|string',
+            'developer_id' =>'required',
+            'publisher_id' => 'required',
+            'year' => 'required|integer',
+            'genre' =>'required|array'
+        ]);
+    }
     // private function validateVideogameData(Request $request)
     // return $request->validate([
     //     .
@@ -27,19 +37,19 @@ class VideogameController extends Controller
     public function index()
     {
         $videogames = Videogame::all();
-        // $autori = Developer::all();
-        // $editori = Publisher::all();
-        // $categorie = Genre::all();
-        return view('videogames', compact('videogames'));
+        $developers = Developer::all();
+        $publishers = Publisher::all();
+        $genres = Genre::all();
+        return view('videogames', compact('videogames', 'developers', 'publishers', 'genres'));
     }
 
     public function index_admin()
     {
         $videogames = Videogame::all();
-        // $autori = Developer::all();
-        // $editori = Publisher::all();
-        // $categorie = Genre::all();
-        return view('admin.videogames.index', compact('videogames'));
+        $developers = Developer::all();
+        $publishers = Publisher::all();
+        $genres = Genre::all();
+        return view('admin.videogames.index', compact('videogames', 'developers', 'publishers', 'genres'));
     }
 
     /**
@@ -47,7 +57,10 @@ class VideogameController extends Controller
      */
     public function create()
     {
-        return view ('admin.videogames.create');
+        $developers = Developer::all();
+        $publishers = Publisher::all();
+        $genres = Genre::all();
+        return view ('admin.videogames.create', compact('developers', 'publishers', 'genres'));
     }
 
     /**
@@ -56,30 +69,35 @@ class VideogameController extends Controller
     public function store(Request $request)
     {
         // dd($request);
+        // dd($request->genre); cosa arriva da genre
         //validare i dati
-        $request->validate([
-            'title' => 'required|string|min:3|max:255',
-            'description' => 'required|string',
-            'developer_id' =>'required',
-            'publisher_id' => 'required',
-            'year' => 'required|integer'
-        ]);
+        $validatedData = $this->validateData($request);
+        // $request->validate([
+        //     'title' => 'required|string|min:3|max:255',
+        //     'description' => 'required|string',
+        //     'developer_id' =>'required',
+        //     'publisher_id' => 'required',
+        //     'year' => 'required|integer'
+        // ]);
 
         //creare variabile $validateData = $this->validateVideogameData($request);
         $videogame = new Videogame(); //creo un'istanza
 
-        $videogame->title = $request->title;
-        $videogame->description = $request->description;
-        $videogame->developer_id = $request->developer_id;
-        $videogame->publisher_id = $request->publisher_id;
-        $videogame->year = $request->year;
+        // $videogame->title = $request->title;
+        // $videogame->description = $request->description;
+        // $videogame->developer_id = $request->developer_id;
+        // $videogame->publisher_id = $request->publisher_id;
+        // $videogame->year = $request->year;
+
+        $videogame->fill($validatedData);
 
         $videogame->save();
+        $videogame->genre()->attach($request->genre); //genre() è il nome della relazione nel model, il secondo genre è il nome dell'array nella pagina create
 
         return redirect()->route('admin.videogames.index');
 
 
-        // $videogame->fill($validateData)
+        // $videogame->fill($validatedData)
 
         // gestiamo l'inserimento dell'immagine
         // $fileName = time() . '_' .$request->file('poster')->getClientOriginalName(); 
@@ -99,6 +117,7 @@ class VideogameController extends Controller
     public function show(string $id)
     {
         $videogame = Videogame::find($id);
+        
         return view('show', compact('videogame'));
     }
 
@@ -108,7 +127,10 @@ class VideogameController extends Controller
     public function edit(string $id)
     {
         $videogame = Videogame::find($id);
-        return view('admin.videogames.edit', compact('videogame'));
+        $developers = Developer::all();
+        $publishers = Publisher::all();
+        $genres = Genre::all();
+        return view('admin.videogames.edit', compact('videogame', 'developers', 'publishers', 'genres'));
     }
 
     /**
@@ -117,16 +139,17 @@ class VideogameController extends Controller
     public function update(Request $request, string $id)
     {
         // dd($request);
-        $request->validate([
-            'title' => 'required|string|min:3|max:255',
-            'description' => 'required|string',
-            'developer_id' =>'required',
-            'publisher_id' => 'required',
-            'year' => 'required|integer'
-        ]);
+        $validatedData = $this->validateData($request);
+        // $request->validate([
+        //     'title' => 'required|string|min:3|max:255',
+        //     'description' => 'required|string',
+        //     'developer_id' =>'required',
+        //     'publisher_id' => 'required',
+        //     'year' => 'required|integer'
+        // ]);
 
         $videogame = Videogame::find($id);
-        $videogame->update($request->all());
+        $videogame->update($validatedData);
 
         return redirect()->route('admin.videogames.index');
 
@@ -137,6 +160,8 @@ class VideogameController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $videogame = Videogame::find($id);
+        $videogame->delete();
+        return redirect()->route('admin.videogames.index');
     }
 }

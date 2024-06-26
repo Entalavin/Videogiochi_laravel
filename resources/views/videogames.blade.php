@@ -13,17 +13,22 @@
     <div class="row mx-auto" style="width: 100%;">
         @foreach ($videogames as $videogame)
         {{-- @dd($videogame) --}}
+        {{-- @dd($developers) --}}
+        {{-- @dd($genres) --}}
         <div class="col-md-3 mb-5 px-5">
             <div class="card" style="width: 18rem; background-color:rgb(192, 159, 223)">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="..." class="card-img-top" alt="immagine">
                 <div class="card-body">
                   <h5 class="card-title">{{$videogame->title}}</h5>
                   <h6 class="card-subtitle mb-2">Anno di uscita: {{$videogame->year}}</h6>
+                  @if($videogame->genre->isNotEmpty())
                   <h6 class="card-subtitle mb-2">Genere: 
-                    {{-- @foreach($videogame->genre as $genre){{$videogame->genre}} </h6>
-                    @endforeach --}}
-                    <br>
-                  <a href=" {{route('show', $videogame->id)}}" class="btn btn-primary mt-5">Mostra dettagli!</a>
+                    @foreach($videogame->genre as $genre){{$genre->name}} 
+                      @unless($loop->last), @endunless
+                    @endforeach
+                  </h6>
+                  @endif
+                  <a href=" {{route('show', $videogame->id)}}" class="btn btn-primary mt-4">Mostra dettagli!</a>
                 </div>
               </div>
         </div>

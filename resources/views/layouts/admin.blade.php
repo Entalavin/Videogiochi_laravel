@@ -24,7 +24,7 @@
                 <a class="nav-link active" aria-current="page" href="{{route ('admin.videogames.index')}}">Gestisci Videogiochi</a>
               </li>
               <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{route ('admin.dashboard') }}">Gestisci Developer</a>
+              <a class="nav-link active" aria-current="page" href="{{route ('admin.developers.index') }}">Gestisci Developer</a>
               </li>
               <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{{route ('admin.dashboard') }}">Gestisci Publisher</a>
