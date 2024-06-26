@@ -151,6 +151,8 @@ class VideogameController extends Controller
         $videogame = Videogame::find($id);
         $videogame->update($validatedData);
 
+        $videogame->genre()->sync($request->genre);
+
         return redirect()->route('admin.videogames.index');
 
     }
