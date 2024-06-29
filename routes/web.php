@@ -16,6 +16,10 @@ use App\Http\Controllers\DeveloperController;
 |
 */
 
+Route::get('/ANGELINA', function () { //statica
+    return view('admin.angelina');
+})->name('angelina');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {

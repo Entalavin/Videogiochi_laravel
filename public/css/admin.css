@@ -5,3 +5,19 @@ body {
   font-weight: 400;
   font-style: normal;
 }
+/* 
+PAGINA DI ANGELINA */
+
+.angelina-pic {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.angelina-pic img {
+
+    width: auto;
+    height: 550px;
+}
+
+/* 
+PAGINA DI ANGELINA */
