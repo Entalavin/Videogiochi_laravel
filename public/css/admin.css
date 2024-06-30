@@ -5,6 +5,10 @@ body {
   font-weight: 400;
   font-style: normal;
 }
+.sfondo-main {
+    background-image: url("/img/sfondodashboard.jpg");
+    background-size: cover;
+  }
 
 /* 
 PAGINA DI ANGELINA */
@@ -27,3 +31,4 @@ PAGINA DI ANGELINA */
 }
 /* 
 PAGINA DI ANGELINA */
+/* ("img/sfondodashboard.jpg") */
