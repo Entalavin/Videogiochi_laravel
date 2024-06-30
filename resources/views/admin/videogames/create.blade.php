@@ -5,7 +5,7 @@
 @section('content')
 {{-- @dd($developers) --}}
 
-<div class="container">
+<div class="container" >
     <h1 class="text-center text-uppercase">inserimento videogioco</h1>
     <form action=" {{route('admin.videogames.store')}} " method="post" enctype="multipart/form-data">
         @csrf
@@ -61,12 +61,14 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="mb-3">
+        <div class="form-group mb-3">
             <label for="poster" class="form-label">Immagine Cover</label><br>
             <input type="file" name="poster" id="poster" class="form-control-file">
         </div>
         <button type="submit" class="btn btn-primary">Inserisci</button>
     </form>
+    {{-- ottimo lavoro quello dopo brava valentina --}}
+    <br><br><br><br><br><br> 
 </div>
 
 

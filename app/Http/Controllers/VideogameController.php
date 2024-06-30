@@ -7,6 +7,7 @@ use App\Models\Videogame;
 use App\Models\Developer;
 use App\Models\Publisher;
 use App\Models\Genre;
+use Illuminate\Support\Facades\Storage;
 
 class VideogameController extends Controller
 {
@@ -178,7 +179,15 @@ class VideogameController extends Controller
     public function destroy(string $id)
     {
         $videogame = Videogame::find($id);
+
+        $posterPath = 'public/posters/' . $videogame->poster;
+        Storage::delete($posterPath);
+
         $videogame->delete();
+
         return redirect()->route('admin.videogames.index');
+
+        
+
     }
 }

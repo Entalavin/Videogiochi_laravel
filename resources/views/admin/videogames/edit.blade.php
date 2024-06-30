@@ -9,14 +9,14 @@
     <form action="{{route('admin.videogames.update', $videogame->id)}}" method="POST" enctype="multipart/form-data">
         @method('PUT')
         @csrf
-        <div class="mb-3">
+        <div class="form-group mb-3">
             <label for="title" class="form-label">Titolo</label>
             <input type="text" class="form-control" id="title" name="title" value= "{{$videogame->title}}" required>
             @error('title')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="mb-3">
+        <div class="form-group mb-3">
             <label for="description" class="form-label">Descrizione</label>
             <textarea type="text" class="form-control" id="description" name="description" required>{{$videogame->description}}</textarea>
             @error('description')
@@ -28,7 +28,7 @@
             <input type="checkbox" id="genre_{{$genre->id}}" name="genre[]" value="{{$genre->id}}" {{ $videogame->genre->contains($genre->id) ? 'checked' : '' }}>
             <label for="genre_{{$genre->id}}">{{$genre->name}}</label>
             @endforeach --}}
-            <label class="form-label">Generi</label><br>
+            <label class="form-group form-label">Generi</label><br>
             @foreach($genres as $genre)
                 <input type="checkbox" id="genre_{{ $genre->id }}" name="genre[]" value="{{ $genre->id }}" {{ $videogame->genre->contains($genre->id) ? 'checked' : '' }}>
                 <label for="genre_{{ $genre->id }}">{{ $genre->name }}</label>
@@ -43,7 +43,7 @@
                 </div>
             @endforeach --}}
         </div>
-        <div class="mb-3">
+        <div class="form-group mb-3">
             <label for="developer_id" class="form-label">Developer</label>
             <select name="developer_id" id="developer_id" class="form-control" required>
                 @foreach($developers as $developer)
@@ -54,7 +54,7 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="mb-3">
+        <div class="form-group mb-3">
             <label for="publisher_id" class="form-label">Publisher</label>
             <select name="publisher_id" id="publisher_id" class="form-control" required>
                 @foreach($publishers as $publisher)
@@ -65,14 +65,14 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="mb-3">
+        <div class="form-group mb-3">
             <label for="year" class="form-label">Anno</label>
             <input type="text" class="form-control" id="year" name="year" value= "{{$videogame->year}}"  required>
             @error('year')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="mb-3">
+        <div class="form-group mb-3">
             <label for="poster" class="form-label">Immagine Cover</label><br>
             <input type="file" name="poster" id="poster" class="form-control-file">
             <img src="{{ asset('storage/' . $videogame->poster) }}" alt="{{ $videogame->title }}" class="img-thumbnail mt-2" style="max-width: 150px;">

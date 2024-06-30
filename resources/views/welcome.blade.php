@@ -62,7 +62,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h2>Sviluppato da Moon Studios</h2>
+        <h2>Sviluppato da: Moon Studios</h2>
         <h2>Publisher: Xbox Game Studios</h2> <br>
         <h3 class="text-center starreview"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></h3>
       </div>
@@ -81,7 +81,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h2>Sviluppato da Moon Studios</h2>
+        <h2>Sviluppato da: Moon Studios</h2>
         <h2>Publisher: Xbox Game Studios</h2> <br>
         <h3 class="text-center starreview"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></h3>
       </div>
@@ -100,7 +100,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h2>Sviluppato da Moon Studios</h2>
+        <h2>Sviluppato da: Moon Studios</h2>
         <h2>Publisher: Xbox Game Studios</h2> <br>
         <h3 class="text-center starreview"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></h3>
       </div>
@@ -119,7 +119,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h2>Sviluppato da Moon Studios</h2>
+        <h2>Sviluppato da: Moon Studios</h2>
         <h2>Publisher: Xbox Game Studios</h2> <br>
         <h3 class="text-center starreview"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></h3>
       </div>
@@ -138,7 +138,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h2>Sviluppato da Moon Studios</h2>
+        <h2>Sviluppato da: Moon Studios</h2>
         <h2>Publisher: Xbox Game Studios</h2> <br>
         <h3 class="text-center starreview"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></h3>
       </div>
@@ -157,7 +157,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h2>Sviluppato da Moon Studios</h2>
+        <h2>Sviluppato da: Moon Studios</h2>
         <h2>Publisher: Xbox Game Studios</h2> <br>
         <h3 class="text-center starreview"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></h3>
       </div>
