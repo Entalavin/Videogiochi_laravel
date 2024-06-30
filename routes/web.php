@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VideogameController;
 use App\Http\Controllers\DeveloperController;
+use App\Http\Controllers\PublisherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,13 @@ Route::post('/dashboard/developers',[DeveloperController::class, 'store'])->name
 //edit
 Route::get('/dashboard/developers/edit_developer/{developer}',[DeveloperController::class, 'edit'])->name('admin.developers.edit');
 Route::put('/dashboard/developers/{developer}',[DeveloperController::class, 'update'])->name('admin.developers.update');
+
+//route admin publisher
+
+Route::get('/dashboard/publishers', [PublisherController::class, 'index'])->name('admin.publishers.index');
+//create
+Route::get('/dashboard/publishers/create_publisher',[PublisherController::class, 'create'])->name('admin.publishers.create');
+Route::post('/dashboard/publishers',[PublisherController::class, 'store'])->name('admin.publishers.store');
+//edit
+Route::get('/dashboard/publishers/edit_publisher/{publisher}',[PublisherController::class, 'edit'])->name('admin.publishers.edit');
+Route::put('/dashboard/publishers/{publisher}',[PublisherController::class, 'update'])->name('admin.publishers.update');

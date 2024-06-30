@@ -3,15 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Publisher;
 
 class PublisherController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    private function validateDataPub(Request $request) //funzione privata alla quale passo l'oggetto request, l'ho messa fuori la validazione perché mi serve uguale in più punti.
+     {
+         return $request->validate([
+             'name' => 'required',
+             'nationality' => 'required',
+        ]);
+     }
     public function index()
     {
-        //
+        $publishers = Publisher::paginate(7);
+        return view('admin.publishers.index', compact('publishers'));
     }
 
     /**
@@ -19,7 +28,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        //
+        return view ('admin.publishers.create');
     }
 
     /**
@@ -27,7 +36,11 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedDataPub = $this->validateDataPub($request);
+        $publisher = new Publisher();
+        $publisher->fill($validatedDataPub);
+        $publisher->save();
+        return redirect()->route('admin.publishers.index');
     }
 
     /**
@@ -43,7 +56,8 @@ class PublisherController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $publisher = Publisher::find($id);
+        return view('admin.publishers.edit', compact('publisher'));
     }
 
     /**
@@ -51,7 +65,11 @@ class PublisherController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedDataPub = $this->validateDataPub($request);
+        $publisher = Publisher::find($id);
+        $publisher->update($validatedDataPub);
+
+        return redirect()->route('admin.publishers.index');
     }
 
     /**

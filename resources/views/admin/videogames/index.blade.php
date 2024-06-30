@@ -17,6 +17,7 @@
       <tr class="table-warning">
         <th scope="col">id</th>
         <th scope="col">Titolo</th>
+        <th scope="col">Cover</th>
         <th scope="col">Developer</th>
         <th scope="col">Publisher</th>
         <th scope="col">Operazioni</th>
@@ -28,14 +29,17 @@
       <tr class="table-primary"> {{-- da fare il foreach --}}
         <th scope="row"> {{$videogame->id}} </th>
         <td>{{$videogame->title}}</td>
+        <td>
+          <img src="{{asset('storage/' . $videogame->poster)}}" alt="{{$videogame->title}}" style="max-width: 150px" class="img-thumbnail">
+        </td>
         <td>{{$videogame->developer->name}}</td>
         <td>{{$videogame->publisher->name}}</td>
         <td>
-          <a href=" {{route('admin.videogames.edit', $videogame->id)}} ">Modifica</a>
+          <a class="btn btn-primary" href="{{route('admin.videogames.edit', $videogame->id)}}">Modifica</a>
           <form action="{{route('admin.videogames.destroy', $videogame->id)}}" method="post">
             @csrf
             @method('delete')
-            <input type="submit" value="Elimina" onclick="return confirm('VUOI DAVVERO CANCELLARE?')">
+            <input class="btn btn-danger px-3" type="submit" value="Elimina" onclick="return confirm('VUOI DAVVERO CANCELLARE?')">
           </form>
         </td>
       </tr>

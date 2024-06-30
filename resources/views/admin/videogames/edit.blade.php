@@ -6,7 +6,7 @@
 
 <div class="container">
     <h1 class="text-center text-uppercase">modifica videogioco</h1>
-    <form action="{{route('admin.videogames.update', $videogame->id)}}" method="POST">
+    <form action="{{route('admin.videogames.update', $videogame->id)}}" method="POST" enctype="multipart/form-data">
         @method('PUT')
         @csrf
         <div class="mb-3">
@@ -28,6 +28,7 @@
             <input type="checkbox" id="genre_{{$genre->id}}" name="genre[]" value="{{$genre->id}}" {{ $videogame->genre->contains($genre->id) ? 'checked' : '' }}>
             <label for="genre_{{$genre->id}}">{{$genre->name}}</label>
             @endforeach --}}
+            <label class="form-label">Generi</label><br>
             @foreach($genres as $genre)
                 <input type="checkbox" id="genre_{{ $genre->id }}" name="genre[]" value="{{ $genre->id }}" {{ $videogame->genre->contains($genre->id) ? 'checked' : '' }}>
                 <label for="genre_{{ $genre->id }}">{{ $genre->name }}</label>
@@ -71,13 +72,15 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
+        <div class="mb-3">
+            <label for="poster" class="form-label">Immagine Cover</label><br>
+            <input type="file" name="poster" id="poster" class="form-control-file">
+            <img src="{{ asset('storage/' . $videogame->poster) }}" alt="{{ $videogame->title }}" class="img-thumbnail mt-2" style="max-width: 150px;">
+        </div>
+
+
         <button type="submit" class="btn btn-primary">Modifica</button>
     </form>
 </div>
 
 @endsection
-
-
-
-{{-- <form method="POST" action="{{ route('films.store') }}" enctype="multipart/form-data"> --}}
-

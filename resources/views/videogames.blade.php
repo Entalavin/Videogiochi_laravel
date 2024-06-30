@@ -17,7 +17,7 @@
         {{-- @dd($genres) --}}
         <div class="col-md-3 mb-5 px-5">
             <div class="card" style="width: 18rem; background-color:rgb(192, 159, 223)">
-                <img src="..." class="card-img-top" alt="immagine">
+                <img src="{{asset('storage/' . $videogame->poster)}}" class="card-img-top" alt="immagine_{{$videogame->title}}">
                 <div class="card-body">
                   <h5 class="card-title">{{$videogame->title}}</h5>
                   <h6 class="card-subtitle mb-2">Anno di uscita: {{$videogame->year}}</h6>

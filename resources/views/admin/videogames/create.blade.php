@@ -7,7 +7,7 @@
 
 <div class="container">
     <h1 class="text-center text-uppercase">inserimento videogioco</h1>
-    <form action=" {{route('admin.videogames.store')}} " method="post">
+    <form action=" {{route('admin.videogames.store')}} " method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Titolo</label>
@@ -24,6 +24,7 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label class="form-label">Generi</label><br>
             @foreach($genres as $genre)
             <input type="checkbox" id="genre_{{$genre->id}}" name="genre[]" value="{{$genre->id}}">
             <label for="genre_{{$genre->id}}">{{$genre->name}}</label>
@@ -59,6 +60,10 @@
             @error('year')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
+        </div>
+        <div class="mb-3">
+            <label for="poster" class="form-label">Immagine Cover</label><br>
+            <input type="file" name="poster" id="poster" class="form-control-file">
         </div>
         <button type="submit" class="btn btn-primary">Inserisci</button>
     </form>

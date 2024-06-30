@@ -18,10 +18,11 @@ class VideogameController extends Controller
         return $request->validate([
             'title' => 'required|string|min:3|max:255',
             'description' => 'required|string',
-            'developer_id' =>'required',
+            'poster' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'developer_id' => 'required',
             'publisher_id' => 'required',
             'year' => 'required|integer',
-            'genre' =>'required|array'
+            'genre' => 'required|array'
         ]);
     }
     // private function validateVideogameData(Request $request)
@@ -60,7 +61,7 @@ class VideogameController extends Controller
         $developers = Developer::all();
         $publishers = Publisher::all();
         $genres = Genre::all();
-        return view ('admin.videogames.create', compact('developers', 'publishers', 'genres'));
+        return view('admin.videogames.create', compact('developers', 'publishers', 'genres'));
     }
 
     /**
@@ -80,7 +81,6 @@ class VideogameController extends Controller
         //     'year' => 'required|integer'
         // ]);
 
-        //creare variabile $validateData = $this->validateVideogameData($request);
         $videogame = new Videogame(); //creo un'istanza
 
         // $videogame->title = $request->title;
@@ -89,8 +89,16 @@ class VideogameController extends Controller
         // $videogame->publisher_id = $request->publisher_id;
         // $videogame->year = $request->year;
 
-        $videogame->fill($validatedData);
+        $videogame->fill($validatedData); //riempio i campi della tabella
 
+        // gestiamo l'inserimento dell'immagine
+        if ($request->hasFile('poster')) {
+            $filename = time() . '_' . $request->file('poster')->getClientOriginalName();
+            // questo poster nella parentesi deve essere uguale al name sul form, id e for devono pure essere uguali. time serve per mettere il timestamp concatenato al nome del file per evitare refusi
+
+            $posterpath = $request->file('poster')->storeAs('posters', $filename, 'public'); //carica l'immagine nella cartella storage/posters
+            $videogame->poster = $posterpath; //salva il percorso nel campo del db
+        }
         $videogame->save();
         $videogame->genre()->attach($request->genre); //genre() è il nome della relazione nel model, il secondo genre è il nome dell'array nella pagina create
 
@@ -99,12 +107,7 @@ class VideogameController extends Controller
 
         // $videogame->fill($validatedData)
 
-        // gestiamo l'inserimento dell'immagine
-        // $fileName = time() . '_' .$request->file('poster')->getClientOriginalName(); 
-        // questo poster nella parentesi deve essere uguale al name sul form, id e for devono pure essere uguali. time serve per mettere il timestamp concatenato al nome del file per evitare refusi
-        // $posterPath = $request->file('poster')->storeAs('posters', $filename, 'public'); carica l'immagine nella cartella storage/posters
-        // $videogame->poster = $posterPath; salva il percorso nel campo del db
-        
+
 
         //if($videogame->save()){$videogame->genres()->attach($validateData['genres'])};  attacca i dati nella tabella ponte
         // //return redirect->route('admin.videogames.index'nome della rotta giusta ovviamente); oppure dire che se c'è qualche errore rimane qua con messaggio di errore
@@ -117,7 +120,7 @@ class VideogameController extends Controller
     public function show(string $id)
     {
         $videogame = Videogame::find($id);
-        
+
         return view('show', compact('videogame'));
     }
 
@@ -148,13 +151,25 @@ class VideogameController extends Controller
         //     'year' => 'required|integer'
         // ]);
 
-        $videogame = Videogame::find($id);
-        $videogame->update($validatedData);
+        $videogame = Videogame::find($id); //prendi il gioco con quell'id
+        $videogame->fill($validatedData);
 
-        $videogame->genre()->sync($request->genre);
+
+
+        if ($request->hasFile('poster')) {
+            $filename = time() . '_' . $request->file('poster')->getClientOriginalName();
+            // questo poster nella parentesi deve essere uguale al name sul form, id e for devono pure essere uguali. time serve per mettere il timestamp concatenato al nome del file per evitare refusi
+
+            $posterpath = $request->file('poster')->storeAs('posters', $filename, 'public'); //carica l'immagine nella cartella storage/posters
+            $videogame->poster = $posterpath; //salva il percorso nel campo del db
+        }
+        if ($videogame->save()) {
+            $videogame->genre()->sync($request->genre);
+        }
+        // $videogame->update($validatedData); con il salvataggio così non funzionava la modifica delle immagini di copertina
+        // $videogame->genre()->sync($request->genre);
 
         return redirect()->route('admin.videogames.index');
-
     }
 
     /**

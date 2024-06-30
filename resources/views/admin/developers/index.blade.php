@@ -28,15 +28,55 @@
                 <td>{{$developer->name}}</td>
                 <td>{{$developer->nationality}}</td>
                 <td>
-                  <a href=" {{route('admin.developers.edit', $developer->id)}} ">Modifica</a>
+                  <a class="btn btn-primary" href=" {{route('admin.developers.edit', $developer->id)}} ">Modifica</a>
                   <form action="">
-                    <input type="submit" value='Elimina'>
+                    <input class="btn btn-danger px-3" type="submit" value='Elimina' onclick="return confirm('VUOI DAVVERO CANCELLARE?')">
                   </form>
                 </td>
               </tr>
               @endforeach
             </tbody>
           </table>
+          <div class="pagination-container">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    {{-- Link alla pagina precedente --}}
+                    @if ($developers->onFirstPage())
+                        <li class="page-item disabled">
+                            <span class="page-link">&laquo;</span>
+                        </li>
+                    @else
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $developers->previousPageUrl() }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                    @endif
+                    
+                    {{-- Link alle pagine --}}
+                    @foreach ($developers->getUrlRange(1, $developers->lastPage()) as $page => $url)
+                        <li class="page-item {{ $page == $developers->currentPage() ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                        </li>
+                    @endforeach
+                    
+                    {{-- Link alla pagina successiva --}}
+                    @if ($developers->hasMorePages())
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $developers->nextPageUrl() }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    @else
+                        <li class="page-item disabled">
+                            <span class="page-link">&raquo;</span>
+                        </li>
+                    @endif
+                </ul>
+            </nav>
+        </div>
         </div>
 
 
